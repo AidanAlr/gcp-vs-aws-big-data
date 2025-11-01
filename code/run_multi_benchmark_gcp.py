@@ -42,13 +42,9 @@ def run_ml_multi(num_runs: int = 10, cleanup: bool = True) -> dict:
             logger.error(f"✗ ML Run {i}/{num_runs} failed: {str(e)}")
             # Continue with remaining runs
 
-    # Aggregate and save
+    # Aggregate and print summary
     aggregator.aggregate()
     aggregator.print_summary()
-
-    summary_dir = os.path.join(EXPERIMENT_CONFIG["results_dir"], "summary")
-    summary_file = aggregator.save_to_file(summary_dir)
-    logger.info(f"ML aggregated results saved to: {summary_file}")
 
     return aggregator.get_metrics()
 
@@ -85,13 +81,9 @@ def run_storage_multi(num_runs: int = 10, cleanup: bool = True) -> dict:
             logger.error(f"✗ Storage Run {i}/{num_runs} failed: {str(e)}")
             # Continue with remaining runs
 
-    # Aggregate and save
+    # Aggregate and print summary
     aggregator.aggregate()
     aggregator.print_summary()
-
-    summary_dir = os.path.join(EXPERIMENT_CONFIG["results_dir"], "summary")
-    summary_file = aggregator.save_to_file(summary_dir)
-    logger.info(f"Storage aggregated results saved to: {summary_file}")
 
     return aggregator.get_metrics()
 
@@ -166,13 +158,9 @@ def run_pyspark_multi(dataset_mode: str, num_runs: int, cleanup: bool = True) ->
             except Exception as e:
                 logger.error(f"✗ Failed to delete cluster: {str(e)}")
 
-    # Aggregate and save
+    # Aggregate and print summary
     aggregator.aggregate()
     aggregator.print_summary()
-
-    summary_dir = os.path.join(EXPERIMENT_CONFIG["results_dir"], "summary")
-    summary_file = aggregator.save_to_file(summary_dir)
-    logger.info(f"PySpark {dataset_mode} aggregated results saved to: {summary_file}")
 
     return aggregator.get_metrics()
 
@@ -268,19 +256,6 @@ def run_all_multi(
     logger.info(f"End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
     logger.info(f"Total Duration: {total_duration / 3600:.2f} hours")
     logger.info("=" * 80)
-
-    # Save complete results
-    import json
-
-    summary_dir = os.path.join(EXPERIMENT_CONFIG["results_dir"], "summary")
-    os.makedirs(summary_dir, exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    complete_file = os.path.join(
-        summary_dir, f"gcp_complete_multi_run_{timestamp}.json"
-    )
-    with open(complete_file, "w") as f:
-        json.dump(results, f, indent=2)
-    logger.info(f"Complete results saved to: {complete_file}")
 
     return results
 

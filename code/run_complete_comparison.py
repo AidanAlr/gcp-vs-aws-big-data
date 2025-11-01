@@ -120,32 +120,10 @@ def run_complete_comparison(
     results["total_duration_seconds"] = total_duration
     results["total_duration_hours"] = total_duration / 3600
 
-    # Save complete comparison results
+    # Comparison results are available in the results dictionary
     logger.info("\n" + "=" * 90)
-    logger.info(" " * 25 + "SAVING COMPARISON RESULTS")
+    logger.info(" " * 25 + "COMPARISON COMPLETE")
     logger.info("=" * 90)
-
-    summary_dir = os.path.join(EXPERIMENT_CONFIG["results_dir"], "summary")
-    os.makedirs(summary_dir, exist_ok=True)
-
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    comparison_file = os.path.join(summary_dir, f"complete_comparison_{timestamp}.json")
-
-    with open(comparison_file, "w") as f:
-        json.dump(results, f, indent=2)
-
-    logger.info(f"Complete comparison results saved to: {comparison_file}")
-
-    # Generate comparison report
-    try:
-        from utils.comparison_reporter import generate_comparison_report
-
-        report_file = generate_comparison_report(results, summary_dir)
-        logger.info(f"Comparison report generated: {report_file}")
-    except ImportError:
-        logger.warning("comparison_reporter not available, skipping report generation")
-    except Exception as e:
-        logger.error(f"Failed to generate comparison report: {str(e)}")
 
     # Print final summary
     logger.info("\n" + "=" * 90)
@@ -182,8 +160,6 @@ def run_complete_comparison(
     logger.info(
         f"  Individual runs:     {EXPERIMENT_CONFIG['results_dir']}/{{ml,pyspark,storage}}/"
     )
-    logger.info(f"  Aggregated results:  {summary_dir}/")
-    logger.info(f"  Comparison report:   {comparison_file}")
     logger.info("=" * 90)
 
     return results
