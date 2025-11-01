@@ -1,0 +1,72 @@
+
+================================================================================
+STORAGE
+================================================================================
+
+UPLOAD:
+  AWS (n=10): mean=25.37s  std=1.30s  min=23.34s  max=27.27s
+  GCP (n=10): mean=82.71s  std=57.66s  min=31.10s  max=240.40s
+  Comparison: GCP is +226.0% vs AWS
+
+DOWNLOAD:
+  AWS (n=10): mean=17.02s  std=0.93s  min=15.61s  max=18.44s
+  GCP (n=10): mean=26.60s  std=7.32s  min=11.26s  max=35.56s
+  Comparison: GCP is +56.3% vs AWS
+
+SEQUENTIAL_READ:
+  AWS (n=10): mean=16.36s  std=1.23s  min=14.27s  max=18.17s
+  GCP (n=10): mean=23.77s  std=7.87s  min=10.96s  max=36.86s
+  Comparison: GCP is +45.3% vs AWS
+
+WRITE:
+  AWS (n=10): mean=3.97s  std=0.96s  min=2.38s  max=6.03s
+  GCP (n=10): mean=9.65s  std=18.29s  min=1.43s  max=64.20s
+  Comparison: GCP is +143.2% vs AWS
+
+================================================================================
+PYSPARK SAMPLE
+================================================================================
+
+AWS (n=10):
+  Time:  mean=125.20s  std=9.07s  min=121.75s  max=152.38s
+  Cost:  mean=$0.0271  std=$0.0020  min=$0.0264  max=$0.0330
+
+GCP (n=10):
+  Time:  mean=97.19s  std=10.37s  min=91.64s  max=122.83s
+  Cost:  mean=$0.0213  std=$0.0020  min=$0.0205  max=$0.0274
+
+Comparison:
+  Time: GCP is -22.4% vs AWS
+  Cost: GCP is -21.4% vs AWS
+
+================================================================================
+PYSPARK LARGE
+================================================================================
+
+AWS (n=5):
+  Time:  mean=938.06s  std=22.74s  min=911.93s  max=972.88s
+  Cost:  mean=$0.2069  std=$0.0049  min=$0.2013  max=$0.2145
+
+GCP (n=5):
+  Time:  mean=912.56s  std=22.53s  min=876.39s  max=937.06s
+  Cost:  mean=$0.2084  std=$0.0050  min=$0.2003  max=$0.2139
+
+Comparison:
+  Time: GCP is -2.7% vs AWS
+  Cost: GCP is +0.7% vs AWS
+
+================================================================================
+ML
+================================================================================
+
+AWS (n=12):
+  Time:  mean=1687.31s  std=56.32s  min=1586.07s  max=1780.11s
+  Cost:  mean=$0.3652  std=$0.0116  min=$0.3439  max=$0.3842
+
+GCP (n=10):
+  Time:  mean=716.37s  std=59.81s  min=630.10s  max=812.86s
+  Cost:  mean=$0.1611  std=$0.0134  min=$0.1417  max=$0.1828
+
+Comparison:
+  Time: GCP is -57.5% vs AWS
+  Cost: GCP is -55.9% vs AWS

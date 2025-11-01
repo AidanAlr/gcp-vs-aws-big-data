@@ -1,0 +1,38 @@
+{
+  "experiment_id": "pyspark_sample_run08_20251031_154333",
+  "provider": "gcp",
+  "timestamp": "2025-10-31T19:43:33.893850",
+  "timings": {
+    "benchmark_execution": 91.10193824768066,
+    "total_time": 91.8382248878479
+  },
+  "costs": {
+    "master_vm": 0.002404078925980462,
+    "master_dataproc_fee": 0.001012243758307563,
+    "worker_vm": 0.004808157851960924,
+    "worker_dataproc_fee": 0.002024487516615126,
+    "total_compute": 0.010248968052864075,
+    "storage": 5.2602739726027396e-05
+  },
+  "metadata": {
+    "benchmark_type": "bigdata",
+    "dataset_mode": "sample",
+    "cluster_config": {
+      "master_machine": "n1-standard-2",
+      "worker_machine": "n1-standard-2",
+      "worker_count": 2,
+      "region": "us-east1",
+      "project_id": "awsgcp-comparison"
+    },
+    "cluster_name": "dataproc-ml-comparison-cluster",
+    "reused_cluster": true,
+    "script_gcs_uri": "gs://awsgcp-comparison-bucket/scripts/bigdata_benchmark_job.py",
+    "job_id": "2ce9f64c-901f-42bc-900e-f8cff988699c"
+  },
+  "errors": [],
+  "summary": {
+    "total_time_seconds": 91.8382248878479,
+    "total_cost_usd": 0.020550538845454176,
+    "success": true
+  }
+}
