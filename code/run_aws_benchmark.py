@@ -17,8 +17,6 @@ logger = setup_logger("aws_benchmark", log_file="../data/results/aws_benchmark.l
 def run_storage_benchmark(cleanup: bool = True, experiment_id: str = None) -> dict:
     """
     Run S3 storage performance benchmark.
-
-    This runs locally (no cluster needed) to test S3 performance.
     """
     logger.info("=" * 60)
     logger.info("Starting AWS S3 Storage Benchmark")
