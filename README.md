@@ -101,14 +101,6 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r code/requirements.txt
 ```
 
-**Dependencies include**:
-
-- `boto3` - AWS SDK
-- `google-cloud-dataproc`, `google-cloud-storage` - GCP SDKs
-- `pyspark` - Distributed computing
-- `pandas`, `numpy`, `pyarrow` - Data processing
-- `python-dotenv` - Configuration management
-
 ### 2. Configure Cloud Credentials
 
 #### AWS Setup
@@ -185,7 +177,7 @@ GCP_WORKER_MACHINE_TYPE=n1-standard-4
 GCP_WORKER_COUNT=2
 ```
 
-### 4. Upload Sample Data to Cloud Storage
+### 4. Upload Data to Cloud Storage
 
 ```bash
 # Upload transactions sample to AWS S3
@@ -239,7 +231,7 @@ python run_multi_benchmark_gcp.py --experiment-type pyspark --dataset-mode sampl
 
 - Creates EMR/Dataproc cluster
 - Uploads PySpark job to cluster
-- Processes 1M transactions with 15 operations
+- Processes transactions with pyspark
 - Collects timing and cost metrics
 - Deletes cluster automatically
 - Saves results to `data/results/`
@@ -280,28 +272,6 @@ python run_gcp_benchmark.py --experiment-type storage
 --dataset-mode {sample,large}           - Dataset size (for pyspark only)
 --num-runs N                           - Number of iterations (default: 1)
 --no-cleanup                           - Keep cluster running
-```
-
-### Expected Output
-
-Each run creates result files in `data/results/`:
-
-```
-data/results/
-├── pyspark/
-│   ├── pyspark_sample_run01_TIMESTAMP.json
-│   ├── pyspark_sample_run02_TIMESTAMP.json
-│   └── ...
-├── ml/
-│   ├── ml_run01_TIMESTAMP.json
-│   └── ...
-├── storage/
-│   └── storage_gcp_storage_run01_TIMESTAMP.json
-└── summary/
-    ├── pyspark_aws_sample_aggregated_TIMESTAMP.json
-    ├── pyspark_gcp_sample_aggregated_TIMESTAMP.json
-    ├── ml_gcp_aggregated_TIMESTAMP.json
-    └── storage_gcp_aggregated_TIMESTAMP.json
 ```
 
 ---
