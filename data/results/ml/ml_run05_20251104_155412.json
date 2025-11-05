@@ -1,0 +1,43 @@
+{
+  "experiment_id": "ml_run05_20251104_155412",
+  "provider": "gcp",
+  "timestamp": "2025-11-04T20:54:12.077259",
+  "timings": {
+    "ml_training": 277.6859791278839,
+    "total_time": 284.01465702056885
+  },
+  "costs": {
+    "master_vm": 0.007327824449208048,
+    "master_dataproc_fee": 0.003085399768087599,
+    "worker_vm": 0.014655648898416095,
+    "worker_dataproc_fee": 0.006170799536175198,
+    "total_compute": 0.031239672651886943,
+    "storage": 0.0003287671232876712
+  },
+  "metadata": {
+    "cluster_config": {
+      "master_machine": "n1-standard-2",
+      "worker_machine": "n1-standard-2",
+      "worker_count": 2,
+      "region": "us-east1",
+      "project_id": "awsgcp-comparison"
+    },
+    "ml_config": {
+      "dataset": "fashion-mnist",
+      "epochs": 5,
+      "batch_size": 128,
+      "model_type": "cnn",
+      "test_split": 0.2
+    },
+    "cluster_name": "dataproc-ml-comparison-cluster",
+    "using_existing_cluster": true,
+    "script_gcs_uri": "gs://awsgcp-comparison-bucket/scripts/ml_job.py",
+    "job_id": "a6adb348-22e7-4b67-995e-70505da7a41a"
+  },
+  "errors": [],
+  "summary": {
+    "total_time_seconds": 284.01465702056885,
+    "total_cost_usd": 0.06280811242706155,
+    "success": true
+  }
+}

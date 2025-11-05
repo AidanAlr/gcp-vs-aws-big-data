@@ -7,7 +7,6 @@ from pyspark.sql import SparkSession
 from pyspark.ml.classification import MultilayerPerceptronClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.ml.feature import VectorAssembler
-from pyspark.sql.functions import col
 
 
 def parse_args():
@@ -197,27 +196,22 @@ def main():
     spark = SparkSession.builder.appName("ML-Training-Comparison").getOrCreate()
 
     try:
-        # Load dataset
         print("\n[1/4] Loading dataset...")
         if args.dataset == "fashion-mnist":
             train_df, test_df = load_fashion_mnist(spark, args.data_path)
         else:
             raise NotImplementedError(f"Dataset {args.dataset} not yet implemented")
 
-        # Prepare features
         print("\n[2/4] Preparing features...")
         train_prepared = prepare_features(train_df)
         test_prepared = prepare_features(test_df)
 
-        # Cache for better performance
         train_prepared.cache()
         test_prepared.cache()
 
-        # Train model
         print("\n[3/4] Training model...")
         model, metrics = train_model(train_prepared, test_prepared, epochs=args.epochs)
 
-        # Save results
         print("\n[4/4] Saving results...")
         job_end_time = time.time()
         job_end_timestamp = datetime.utcnow().isoformat()

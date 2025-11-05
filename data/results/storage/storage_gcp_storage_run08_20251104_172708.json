@@ -1,0 +1,60 @@
+{
+  "provider": "gcp",
+  "timestamp": "2025-11-04T17:27:08.153120",
+  "test_file": "transactions_sample_1m.csv",
+  "file_size_mb": 80.77,
+  "bucket": "awsgcp-comparison-bucket",
+  "tests": [
+    {
+      "operation": "upload",
+      "file_size_mb": 80.77,
+      "duration_seconds": 306.979,
+      "throughput_mbps": 0.26,
+      "key": "benchmarks/upload_test_20251104_172708.csv"
+    },
+    {
+      "operation": "download",
+      "file_size_mb": 80.77,
+      "duration_seconds": 39.737,
+      "throughput_mbps": 2.03,
+      "key": "benchmarks/upload_test_20251104_172708.csv"
+    },
+    {
+      "operation": "sequential_read",
+      "total_mb_read": 80.77,
+      "chunk_size_mb": 1,
+      "duration_seconds": 45.926,
+      "throughput_mbps": 1.76,
+      "key": "benchmarks/upload_test_20251104_172708.csv"
+    },
+    {
+      "operation": "write",
+      "data_size_mb": 5,
+      "duration_seconds": 17.15,
+      "throughput_mbps": 0.29,
+      "key": "benchmarks/write_test_20251104_172708.dat"
+    }
+  ],
+  "summary": {
+    "upload": {
+      "avg_throughput_mbps": 0.26,
+      "avg_duration_seconds": 306.979,
+      "count": 1
+    },
+    "download": {
+      "avg_throughput_mbps": 2.03,
+      "avg_duration_seconds": 39.737,
+      "count": 1
+    },
+    "sequential_read": {
+      "avg_throughput_mbps": 1.76,
+      "avg_duration_seconds": 45.926,
+      "count": 1
+    },
+    "write": {
+      "avg_throughput_mbps": 0.29,
+      "avg_duration_seconds": 17.15,
+      "count": 1
+    }
+  }
+}

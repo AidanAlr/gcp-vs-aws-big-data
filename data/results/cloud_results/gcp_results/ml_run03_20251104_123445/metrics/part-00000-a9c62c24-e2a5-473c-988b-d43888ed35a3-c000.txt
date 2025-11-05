@@ -1,0 +1,17 @@
+{
+  "training_time_seconds": 258.62612414360046,
+  "accuracy": 0.8063,
+  "f1_score": 0.8038797845128917,
+  "epochs": 5,
+  "architecture": [
+    784,
+    256,
+    128,
+    10
+  ],
+  "job_start_time": "2025-11-04T17:35:00.836870",
+  "job_end_time": "2025-11-04T17:40:34.220360",
+  "total_job_time_seconds": 333.38348722457886,
+  "dataset": "fashion-mnist",
+  "batch_size": 128
+}

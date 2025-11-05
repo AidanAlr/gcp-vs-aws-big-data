@@ -2,6 +2,7 @@ import json
 import glob
 import numpy as np
 import sys
+import os
 
 def compare_all_experiments(output_file=None):
     """Print summary stats comparing GCP vs AWS across all experiments"""
@@ -87,6 +88,49 @@ def compare_all_experiments(output_file=None):
             print(f"\nComparison:")
             print(f"  Time: GCP is {time_diff:+.1f}% vs AWS")
             print(f"  Cost: GCP is {cost_diff:+.1f}% vs AWS")
+
+            # For ML experiments, also load and compare training metrics from cloud_results
+            if exp_name == 'ML':
+                ml_metrics = {'aws': {'accuracy': [], 'f1_score': []}, 'gcp': {'accuracy': [], 'f1_score': []}}
+
+                # Load metrics from cloud_results organized by provider
+                provider_paths = {
+                    'aws': 'cloud_results/aws/ml_run*',
+                    'gcp': 'cloud_results/gcp_results/ml_run*'
+                }
+
+                for provider, path_pattern in provider_paths.items():
+                    for ml_dir in glob.glob(path_pattern):
+                        metrics_files = glob.glob(os.path.join(ml_dir, 'metrics', 'part-*.txt'))
+                        for metrics_file in metrics_files:
+                            try:
+                                with open(metrics_file) as f:
+                                    metrics = json.load(f)
+                                    ml_metrics[provider]['accuracy'].append(metrics.get('accuracy', 0))
+                                    ml_metrics[provider]['f1_score'].append(metrics.get('f1_score', 0))
+                            except Exception as e:
+                                pass  # Skip files that can't be parsed
+
+                # Print ML-specific metrics comparison
+                if ml_metrics['aws']['accuracy'] and ml_metrics['gcp']['accuracy']:
+                    print(f"\nML METRICS:")
+                    for provider in ['aws', 'gcp']:
+                        accuracy = np.array(ml_metrics[provider]['accuracy'])
+                        f1 = np.array(ml_metrics[provider]['f1_score'])
+                        print(f"  {provider.upper()} (n={len(accuracy)}):")
+                        print(f"    Accuracy: mean={accuracy.mean():.4f}  std={accuracy.std():.4f}  min={accuracy.min():.4f}  max={accuracy.max():.4f}")
+                        print(f"    F1 Score: mean={f1.mean():.4f}  std={f1.std():.4f}  min={f1.min():.4f}  max={f1.max():.4f}")
+
+                    # Comparison
+                    aws_acc = np.mean(ml_metrics['aws']['accuracy'])
+                    gcp_acc = np.mean(ml_metrics['gcp']['accuracy'])
+                    aws_f1 = np.mean(ml_metrics['aws']['f1_score'])
+                    gcp_f1 = np.mean(ml_metrics['gcp']['f1_score'])
+                    acc_diff = ((gcp_acc - aws_acc) / aws_acc) * 100
+                    f1_diff = ((gcp_f1 - aws_f1) / aws_f1) * 100
+                    print(f"  ML Metrics Comparison:")
+                    print(f"    Accuracy: GCP is {acc_diff:+.2f}% vs AWS")
+                    print(f"    F1 Score: GCP is {f1_diff:+.2f}% vs AWS")
 
     # Restore stdout and close file if redirected
     if f:

@@ -1,0 +1,42 @@
+{
+  "experiment_id": "ml_run01_20251104_161642",
+  "provider": "aws",
+  "timestamp": "2025-11-04T21:16:42.536956",
+  "timings": {
+    "ml_training": 1137.1582248210907,
+    "total_time": 1138.360456943512
+  },
+  "costs": {
+    "master_ec2": 0.03158772846725252,
+    "master_emr_fee": 0.009476318540175756,
+    "core_ec2": 0.06317545693450503,
+    "core_emr_fee": 0.01895263708035151,
+    "total_compute": 0.12319214102228482,
+    "storage": 0.00037808219178082187
+  },
+  "metadata": {
+    "cluster_config": {
+      "master_instance": "m4.large",
+      "core_instance": "m4.large",
+      "core_instance_count": 2,
+      "region": "us-east-1"
+    },
+    "ml_config": {
+      "dataset": "fashion-mnist",
+      "epochs": 5,
+      "batch_size": 128,
+      "model_type": "cnn",
+      "test_split": 0.2
+    },
+    "cluster_id": "j-YUXYPB6UE8TE",
+    "using_existing_cluster": true,
+    "script_s3_uri": "s3://aws-gcp-comparison-1761855870/scripts/ml_job.py",
+    "step_id": "s-030763911R6D2YUY9EOH"
+  },
+  "errors": [],
+  "summary": {
+    "total_time_seconds": 1138.360456943512,
+    "total_cost_usd": 0.24676236423635045,
+    "success": true
+  }
+}
